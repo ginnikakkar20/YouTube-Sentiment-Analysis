@@ -6,7 +6,7 @@ import progress_bar as PB
 
 YOUTUBE_IN_LINK = 'https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=100&order=relevance&pageToken={pageToken}&videoId={videoId}&key={key}'
 YOUTUBE_LINK = 'https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=100&order=relevance&videoId={videoId}&key={key}'
-key = 'AIzaSyCzxJAazkkKRoNfiBncyZwQq9licYUKH2g'
+key = 'KEY'
 	
 def commentExtract(videoId, count = -1):
 	print ("Comments downloading")
