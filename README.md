@@ -1,6 +1,6 @@
 # Youtube-Sentiment-Analysis
 
-##Dependencies:
+## Dependencies:
 1. Lxml
   pip install --upgrade lxml
 2. Requests
