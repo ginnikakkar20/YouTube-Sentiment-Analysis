@@ -59,13 +59,12 @@ def get_sentiment(comments,comments_ratio):
     #print("---------comments extracted--------", comments)
     pos = 0
     neg = 0
+    comments_list = []
     print("############################IN HERE###################")
     positive_comments = []
     negative_comments = []
     mixed_comments = []
-    #print("-----comments----", comments)
     for com in comments:
-        #print("---EACH COM------",com)
         filtered_comments = filter.filter_comments(com)
 
         training.train_classifier()
@@ -75,33 +74,29 @@ def get_sentiment(comments,comments_ratio):
 
         for comment in filtered_comments:
             result = classifier.classify(bag_of_words(comment))
-            
             if result == "pos":
-                pos += 1
-                
+                pos += 1   
             else:
                 neg += 1
 
-        # if (pos - neg) > 0:
-        #     positive_comments.append(com)
-        # else:
-        #     negative_comments.append(com)
-
         result, score = calculate_score(pos,neg,comments_ratio)
+
         if(result == "positive"):
             positive_comments.append(com)
+            temp_dict = {'Comment': com, 'Score': score, 'Sentiment': 'positive'}
         if(result == "negative"):
             negative_comments.append(com)
+            temp_dict = {'Comment': com, 'Score': score, 'Sentiment': 'negative'}
         if(result == "mixed"):
             mixed_comments.append(com)
-
+            temp_dict = {'Comment': com, 'Score': score, 'Sentiment': 'mixed'}
+        comments_list.append(temp_dict)
     #no_of_likes , no_of_dislikes = youtube_stats.get_likes_dislikes(video_id)
-    print("-----##########---------")
     #print(no_of_likes," - ",no_of_dislikes)
     dictionary_comments = {'Positive Comments': positive_comments, 'Negative Comments': negative_comments, 'Mixed Comments': mixed_comments}
 
     #overall_result = calculate_score(pos,neg,no_of_likes,no_of_dislikes,comments_ratio)
 
-    return dictionary_comments
+    return comments_list
 
 

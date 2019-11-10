@@ -1,6 +1,5 @@
 __author__ = 'user'
 
-#from src 
 import sentiment
 import re
 import json
@@ -24,7 +23,7 @@ if __name__ == "__main__":
 
     filepath = 'video_ids.txt'
     output_file = 'output_analysis.txt'
-    DATA_PATH = 'Comments_Youtube'
+    DATA_PATH = 'InputComments'
     FILE = "Output/Output.%s.json"
 
     comment_files = [join(DATA_PATH, f) for f in listdir(DATA_PATH) if (isfile(join(DATA_PATH, f)) and "json" in f)]
@@ -35,15 +34,11 @@ if __name__ == "__main__":
         with open(f, 'r') as outfile:
             data = json.load(outfile)
             data = pd.DataFrame(data)
-            #print("----data-----",data)
-            #print("-------2==-------", data['text'])
             dictionary_comments = sentiment.get_sentiment(data['text'],100)
             print("-----dictionary----", dictionary_comments)
 
             video_id = f[26:37]
-            #print("-----vid is----", video_ids)
             with open(FILE % video_id, "w") as f:
-                print("------output file now--------------")
                 f.write(json.dumps(dictionary_comments))
 
     #data['author_replied'] = data['author_replied'].astype(int)
